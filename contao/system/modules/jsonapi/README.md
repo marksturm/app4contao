@@ -13,5 +13,8 @@ Es werden folgende Inhaltselemente bereitgestellt:
 
 Lizenz: CC BY-NC-SA 4.0
 
+Erklärung im Contao Forum:
+https://community.contao.org/de/showthread.php?63280-Json-API&p=414953#post414953
+
 Meine Amazon-Wunschliste:
 http://www.amazon.de/wishlist/337MMBVNH126C/ref=cm_sw_r_fa_ws_415nxb1XER5PQ
