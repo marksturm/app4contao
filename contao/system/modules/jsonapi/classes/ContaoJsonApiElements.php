@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @package		FacebookConnect
- * @author    	Mark Sturm - privat@mark-sturm.de
- * @license		CC BY-NC-SA 4.0
+ * @author Mark Sturm - privat@mark-sturm.de
+ * @license CC BY-NC-SA 4.0
 */
 
 class ContaoJsonApiElements
