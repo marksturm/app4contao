@@ -1,0 +1,64 @@
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+  <script>
+    var OneSignal = OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "<?=$this->app_id;?>",
+      safari_web_id: '<?=$this->safari_web_id;?>',
+      autoRegister: true, /* Set to true to automatically prompt visitors */
+      promptOptions: {
+        /* Change bold title, limited to 30 characters */
+        siteName: 'marq.one',
+        /* Subtitle, limited to 90 characters */
+        actionMessage: "Möchtest Du immer über die Meldungen von marq.one informiert werden?",
+        /* Example notification title */
+        exampleNotificationTitle: 'marq.one',
+        /* Example notification message */
+        exampleNotificationMessage: 'Dieses ist ein Beispieltext',
+        /* Text below example notification, limited to 50 characters */
+        exampleNotificationCaption: 'Der Dienst ist jederzeit von Dir deaktivierbar',
+        /* Accept button text, limited to 15 characters */
+        acceptButtonText: "Ja!",
+        /* Cancel button text, limited to 15 characters */
+        cancelButtonText: "Nein, danke!"
+    	},
+       subdomainName: 'marqone',
+       notifyButton: {
+			enable: true, /* Required to use the notify button */
+			size: 'medium', /* One of 'small', 'medium', or 'large' */
+			colors: { // Customize the colors of the main button and dialog popup button
+		      'circle.background': 'rgb(32,205,249)',
+		      'circle.foreground': 'white',
+		      'badge.background': 'rgb(32,205,249)',
+		      'badge.foreground': 'white',
+		      'badge.bordercolor': 'white',
+		      'pulse.color': 'white',
+		      'dialog.button.background.hovering': 'rgb(23, 147, 179)',
+		      'dialog.button.background.active': 'rgb(70, 92, 103)',
+		      'dialog.button.background': 'rgb(32,205,249)',
+		      'dialog.button.foreground': 'white'
+		    },
+			position: 'bottom-right', /* Either 'bottom-left' or 'bottom-right' */
+			offset: {
+			    bottom: '20px',
+			    left: '20px', /* Only applied if bottom-left */
+			    right: '20px' /* Only applied if bottom-right */
+			},
+        prenotify: true, /* Show an icon with 1 unread message for first-time site visitors */
+        showCredit: false, /* Hide the OneSignal logo */
+        text: {
+            'tip.state.unsubscribed': 'Benachrichtugnen aktivieren.',
+            'tip.state.subscribed': "Du bist für Benachrichtigungen angemeldet.",
+            'tip.state.blocked': "Du hast Benachrichtigugnen blockiert.",
+            'message.prenotify': 'Hier klicken um Benachrichtigungen zu erhalten.',
+            'message.action.subscribed': "Danke für Deine Anmeldung",
+            'message.action.resubscribed': "Du bekommst jetzt Benachrichtigungen",
+            'message.action.unsubscribed': "Du bekommst keine Benachrichtigungen mehr",
+            'dialog.main.title': 'Benachrichtigungen verwalten',
+            'dialog.main.button.subscribe': 'ANMELDEN',
+            'dialog.main.button.unsubscribe': 'ABMELDEN',
+            'dialog.blocked.title': 'Blockierung von Benachrichtigungen aufheben',
+            'dialog.blocked.message': "Folge dieser Anleitung um Benachrichtigungen zu erlauben:"
+        }
+       }  
+    }]);
+  </script>
