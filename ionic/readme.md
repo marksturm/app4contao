@@ -20,7 +20,7 @@ Für diese App wird [Ionic](http://ionicframework.com/) benötigt.
 
 #### Contentmodul der App
 
-Es wird das Newsmodul, sowie die Artikelverwaltung unterstützt. :
+Es wird das Newsmodu und die Artikelverwaltung unterstützt.
 
  1. Überschrift
  2. Bild
@@ -31,4 +31,4 @@ Es wird das Newsmodul, sowie die Artikelverwaltung unterstützt. :
 
 ----------
 #### Lizenz
-Alle Codeinhalte welche einen entsprechenden Lizenzvermerk haben stehen unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Die kommerzielle Nutzung kann auf Anfrage und unter anderen Bedingungen gestattet werden. Fremdentwicklungen wie z.B. Plugins stehen unter der Lizenz des jeweiligen Entwicklers.
+Alle Codeinhalte welche einen entsprechenden Lizenzvermerk haben, stehen unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>. Die kommerzielle Nutzung kann auf Anfrage und unter anderen Bedingungen gestattet werden. Fremdentwicklungen wie z.B. Plugins stehen unter der Lizenz des jeweiligen Entwicklers.
