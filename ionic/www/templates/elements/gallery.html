@@ -1,0 +1,9 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<h2 ng-if="element.headline" class="resetpmb padding">{{element.headline}}</h2>
+<div class="row gallery">
+    <div class="col col-50" ng-repeat="images in element.pictures track by $index">
+        <img ui-sref="ContaoApp.galleryviewer({ptable:ptable,pid:element.id,index:$index})" src="img/preload.png" ng-src="http://marq.one/{{images.sources[0].src}}" />
+    </div>
+</div>
+

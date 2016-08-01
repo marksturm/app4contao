@@ -1,0 +1,16 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<ion-view class="imageView" hide-nav-bar="true" on-swipe-down="goBack()" native-ui-sref-opts="{reload: true}" native-options="{type: 'slide', direction:'down'}">
+
+  <ion-content scroll="false" lazy-scroll>
+    <ion-slide-box>
+      <ion-slide ng-repeat="element in elements track by $index" ng-init="updateSlider()">
+          <ion-scroll direction="xy" locking="false" zooming="true" min-zoom="1" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false">
+              <div class="item item-image gallery-slide-view">
+              <img src="img/preload.png" ng-src="http://www.marq.one/{{element.img.src}}">
+              </div>
+          </ion-scroll>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>

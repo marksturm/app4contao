@@ -1,0 +1,9 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<h2 ng-if="element.headline" class="padding">{{element.headline}}</h2> 
+<img class="full-image" ng-if="element.picture.sources['1']" 
+ui-sref="ContaoApp.imageviewer({ptable:ptable,id:element.id})" class="nopadding" src="img/preload.png" ng-src="http://marq.one/{{element.picture.sources['1'].src}}"/>
+<div ng-if="element.picture.caption" class="caption">{{element.picture.caption}}</div>
+
+<div class="item item-body text noborder notop-padding nobackground" ng-bind-html="element.text | parseContaoText"></div>
+

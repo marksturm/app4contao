@@ -1,0 +1,32 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<ion-view>
+  <ion-nav-buttons side="right">
+    <button ng-if="ptable == 'tl_news' " ng-click="addToBookmarks(item)" class="button button-clear" ng-class="{'icon ion-android-favorite': liked, 'icon ion-android-favorite-outline': !liked}">
+    </button>
+    <button ng-if="ptable == 'tl_news' " ng-click="share(item)" class="button button-clear icon ion-android-share-alt"></button>
+  </ion-nav-buttons>
+
+<ion-content overflow-scroll="false">
+
+  <div class="list">
+    <div ng-if="item" class="info row">
+      <div class="col"><i class="ion-calendar"></i> {{item.date}} - {{item.time}} Uhr</div>
+      <div class="col right">{{item.author}}</div>
+    </div>
+
+    <div ng-if="item" class="item item-body notop-padding nobackground nobottom-border">
+      <h1>{{item.headline}}</h1>
+      <h2>{{item.subheadline}}</h2>
+      <div class="text" ng-bind-html="item.teaser"></div>
+    </div>
+
+    <div ng-if="elements" ng-repeat="element in elements track by element.id">
+      <div ng-include="getTemplateUrl(element.type)"></div>
+    </div>
+
+  </div>
+
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadElementList()" distance="20%"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

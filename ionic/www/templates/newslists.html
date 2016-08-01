@@ -1,0 +1,47 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<ion-view>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear icon ion-loop" ng-click="doRefresh()"></button>
+  </ion-nav-buttons> 
+<ion-content overflow-scroll="false">
+
+<div ng-repeat="item in items track by item.id" ng-if="$index==0">
+  
+  <div class="list" ui-sref="ContaoApp.content({ptable: 'tl_news', id:item.id})">
+
+    <div class="item item-text-wrap cover" style="background: url(http://marq.one/{{item.picture.sources['1'].src}});">
+        <div class="coverheadlines">
+          <h1>{{item.headline}}</h1>
+          <h2>{{item.subheadline}}</h2>
+        </div>
+     </div>
+    <div class="info row">
+      <div class="col"><i class="ion-calendar"></i> {{item.date}} - {{item.time}} Uhr</div>
+      <div class="col right">{{item.author}}</div>
+    </div>
+    <div class="item item-body nobackground notop-padding" ng-bind-html="item.teaser"></div>
+    </div>
+  </div>
+<div class="shadow"></div>
+
+<div ng-repeat="item in items track by item.id" ng-if="$index > 0">
+  <div class="list short" ui-sref="ContaoApp.content({ptable: 'tl_news', id:item.id})">
+    <div class="info row">
+      <div class="col"><i class="ion-calendar"></i> {{item.date}} - {{item.time}} Uhr</div>
+      <div class="col right">{{item.author}}</div>
+    </div>
+      <div class="item nobackground item-thumbnail-left">
+        <img src="img/preload.png" ng-src="http://marq.one/{{item.picture.sources['0'].src}}">
+        <h3>{{item.headline}}</h3>
+      <div ng-bind-html="item.teaser"></div>
+    </div>
+    <div class="shadow"></div>
+  </div>
+</div>
+
+<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadNewsList()" distance="20%"></ion-infinite-scroll>
+<div ng-if="noMoreItemsAvailable" class="noMoreItemsAvailable"><p>Keine weiteren Nachrichten vorhanden.</p></div>
+</ion-content>
+
+</ion-view>

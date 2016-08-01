@@ -1,0 +1,20 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<ion-view>
+    <ion-content overflow-scroll="false">
+        <ion-list ng-if="items" show-delete="false" can-swipe="true" ng-repeat="item in items" ui-sref="ContaoApp.content({ptable: 'tl_news', id:item.id})">
+        
+        <div class="info row">
+            <div class="col"><i class="ion-calendar"></i> {{item.date}} - {{item.time}} Uhr</div>
+            <div class="col right">{{item.author}}</div>
+        </div>
+            <ion-item class="nobackground">
+                <h2>{{item.headline}}</h2>
+                <div ng-bind-html="item.teaser"></div>
+                <ion-option-button class="button ion-trash-a" ng-click="remove(item)"></ion-option-button>
+          </ion-item>
+          <div class="shadow"></div>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

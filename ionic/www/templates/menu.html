@@ -1,0 +1,31 @@
+<!--  * @author Mark Sturm - privat@mark-sturm.de
+      * @license CC BY-NC-SA 4.0 -->
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+      <ion-nav-bar align-title="left" class="bar-positive nav-title-android" ng-class="{'bar-custom' : changeColor}">
+      <ion-nav-back-button class="button button-clear icon ion-arrow-left-b"></ion-nav-back-button>
+      <ion-nav-buttons side="left">
+          <div class="drawer-button" ng-class="{'drawer-open': drawerIsOpen()}">
+            <button menu-toggle="left" ng-click="toggleDrawer()" class="button button-clear icon ion-navicon-round"></button>
+          </div>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  <ion-nav-view name="menuContent"></ion-nav-view>
+</ion-side-menu-content>
+
+<drawer side="left">
+  <ion-content>
+    <img class="logo"/>
+    
+      <a ng-repeat="mmenu in mainmenu" href="{{mmenu.url}}" class="item item-icon-left" ng-click="closeDrawer()"><i class="icon {{mmenu.icon}}"></i> {{mmenu.label}}</a>
+    
+      <div class="row smenu">
+        <div class="col" ng-repeat="smenu in socialmenu" >
+        <button ng-click="openInAppBrowser(smenu.url)" class="button button-clear icon {{smenu.icon}}"></button>
+        </div>
+      </div>
+  </ion-content>
+</drawer>
+
+</ion-side-menus>
+
