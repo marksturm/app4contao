@@ -22,7 +22,10 @@ class ContaoJsonApi extends \Frontend
 		if(\Input::get('page')) {
 				$page = ContaoJsonApiHelper::stupidityCheck('num',\Input::get('page'));
 			}
-			
+		
+		
+		$ptable=\Input::get('ptable');
+
     	\Controller::setStaticUrls('');
 		
 		header('Access-Control-Allow-Origin: *');
@@ -30,10 +33,10 @@ class ContaoJsonApi extends \Frontend
 		
 		switch (\Input::get('modul')) {
 	    	case "Element":
-	        	echo json_encode(ContaoJsonApiElements::Elements($objPage->imgSize,$id,$pid,$limit,$page));
+	        	echo json_encode(ContaoJsonApiElements::Elements($objPage->imgSize,$id,$pid,$limit,$ptable,$page));
 	        break;
 	    	case "NewsList":
-	       		echo json_encode(ContaoJsonApiNewsList::NewsList($objPage->imgSize,$id,$pid,$limit,$page));
+	       		echo json_encode(ContaoJsonApiNewsList::NewsList($objPage->imgSize,$id,$pid,$limit,$ptable,$page));
 	        break;
 	    	default:
        		die('FU');

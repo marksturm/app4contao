@@ -7,7 +7,7 @@
 
 class ContaoJsonApiElements
 {
-	public function Elements($imgSize,$id,$pid,$limit,$page)
+	public function Elements($imgSize,$id,$pid,$limit,$ptable,$page)
 	{	
 		if(!$limit) {
 			$strLimit = 5;
@@ -18,11 +18,11 @@ class ContaoJsonApiElements
 		$json_models = implode("','", array('text','headline','image','gallery','list','youtube'));
 		
 		if($pid) {
-			$where = "WHERE type IN ('".$json_models."') AND invisible != 1 AND pid IN (".$pid.") AND tstamp > 0 ORDER BY sorting ASC";
+			$where = "WHERE type IN ('".$json_models."') AND ptable='".$ptable."' AND invisible != 1 AND pid IN (".$pid.") AND tstamp > 0 ORDER BY sorting ASC";
 		}
 		
 		if($id) {
-			$where = "WHERE type IN ('".$json_models."') AND invisible != 1 AND id IN (".$id.") AND tstamp > 0 ORDER BY sorting ASC";
+			$where = "WHERE type IN ('".$json_models."') AND ptable='".$ptable."' AND invisible != 1 AND id IN (".$id.") AND tstamp > 0 ORDER BY sorting ASC";
 		}
 		
 
@@ -41,7 +41,7 @@ class ContaoJsonApiElements
 					$limit = $total - $offset;
 				}
 
-		$objTable = Database::getInstance()->prepare("SELECT id,type,sorting FROM tl_content ".$where)->limit($limit,$offset)->execute();
+		$objTable = Database::getInstance()->prepare("SELECT id,type,sorting,ptable FROM tl_content ".$where)->limit($limit,$offset)->execute();
 
 		while ($objTable->next())
 		{

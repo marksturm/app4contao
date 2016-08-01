@@ -7,7 +7,7 @@
 
 class ContaoJsonApiNewsList
 {
-	public function NewsList($imgSize,$id,$pid,$limit,$page)
+	public function NewsList($imgSize,$id,$pid,$limit,$ptable=tl_news,$page)
 	{	
 
 		if(!$limit) {
