@@ -27,6 +27,11 @@ class ContaoJsonApiHelper
 		die();
 	}
 
+	public function parseText($str_text)
+	{
+		return \Controller::replaceInsertTags(html_entity_decode($str_text));	
+	}
+
 	public function stupidityCheck($checkfor,$str_get)	{
 
 		if($checkfor=='num') {	

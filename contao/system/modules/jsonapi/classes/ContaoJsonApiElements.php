@@ -75,7 +75,7 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
 		
 		return $objOutput;
 	}
@@ -83,10 +83,10 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,text,addImage,singleSRC,caption FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
-		$objOutput['text'] = html_entity_decode($objTable->text);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
+		$objOutput['text'] = ContaoJsonApiHelper::parseText($objTable->text);
 		if($objTable->addImage) {
-			$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,html_entity_decode($objTable->caption),$arr_imgSize);
+			$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,ContaoJsonApiHelper::parseText($objTable->caption),$arr_imgSize);
 		}
 		return $objOutput;
 	}
@@ -94,8 +94,8 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,singleSRC,caption FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
-		$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,html_entity_decode($objTable->caption),$arr_imgSize);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
+		$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,ContaoJsonApiHelper::parseText($objTable->caption),$arr_imgSize);
 		
 		return $objOutput;
 	}
@@ -103,7 +103,7 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,multiSRC FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
 		$objPictures = \FilesModel::findMultipleByUuids(deserialize($objTable->multiSRC)); 
 		
 		while ( $objPictures->next() ) { 
@@ -117,7 +117,7 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,listtype,listitems FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
 		$objOutput['listtype'] = $objTable->listtype;
 		$objOutput['list'] = unserialize($objTable->listitems);
 		
@@ -127,7 +127,7 @@ class ContaoJsonApiElements
 		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,youtube FROM tl_content WHERE id=?")->execute($str_contentId)->next();
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
-		$objOutput['headline'] = html_entity_decode(unserialize($objTable->headline)['value']);
+		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
 		$objOutput['youtube'] = $objTable->youtube;
 		
 		return $objOutput;

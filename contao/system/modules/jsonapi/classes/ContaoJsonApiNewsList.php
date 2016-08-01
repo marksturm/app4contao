@@ -43,17 +43,17 @@ class ContaoJsonApiNewsList
 		while ($objTable->next())
 		{
 			$objOutput['id'] = $objTable->id;
-			$objOutput['headline'] = html_entity_decode($objTable->headline);
+			$objOutput['headline'] = ContaoJsonApiHelper::parseText($objTable->headline);
 			$objOutput['date'] = \System::parseDate(\Config::get('dateFormat'), $objTable->date);
 			$objOutput['time'] = \System::parseDate(\Config::get('timeFormat'), $objTable->time);
 			$objOutput['author'] = html_entity_decode(\UserModel::findById($objTable->author)->name);
 			$objOutput['author_id'] = $objTable->author;
-			$objOutput['subheadline'] = html_entity_decode($objTable->subheadline);
-			$objOutput['teaser'] = html_entity_decode($objTable->teaser);
+			$objOutput['subheadline'] = ContaoJsonApiHelper::parseText($objTable->subheadline);
+			$objOutput['teaser'] = ContaoJsonApiHelper::parseText($objTable->teaser);
 			$objOutput['newsurl'] = \Controller::replaceInsertTags('{{news_url::'.$objTable->id.'}}');
 			
 			if($objTable->addImage) {
-				$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,html_entity_decode($objTable->caption),$imgSize);
+				$objOutput['picture'] = ContaoJsonApiHelper::image2json($objTable->singleSRC,ContaoJsonApiHelper::parseText($objTable->caption),$imgSize);
 				}
 
 			$arrTable[]= $objOutput;
