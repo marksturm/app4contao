@@ -23,9 +23,10 @@ class ContaoJsonApi extends \Frontend
 				$page = ContaoJsonApiHelper::stupidityCheck('num',\Input::get('page'));
 			}
 		
+		if(\Input::get('ptable')) {
+				$ptable = ContaoJsonApiHelper::stupidityCheck('ptable',\Input::get('ptable'));
+			}
 		
-		$ptable=\Input::get('ptable');
-
     	\Controller::setStaticUrls('');
 		
 		header('Access-Control-Allow-Origin: *');

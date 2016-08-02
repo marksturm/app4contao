@@ -34,18 +34,26 @@ class ContaoJsonApiHelper
 
 	public function stupidityCheck($checkfor,$str_get)	{
 
-		if($checkfor=='num') {	
-			if(!is_numeric($str_get)) { $has_error = true;	}
-			} else {
-			if(!preg_match("/^\d+(?:,\d+)*$/", $str_get)) { $has_error = true;}	
-			}
+		if($checkfor=='num') {
+			
+				if(!is_numeric($str_get)) { $has_error = true;	}
+			
+		}
+		elseif($checkfor=='ptable') {
+
+				if(preg_match("/[^a-z_\-0-9]/i", $str_get)!=null) { $has_error = true;}
+
+		}  else {
+			
+				if(!preg_match("/^\d+(?:,\d+)*$/", $str_get)) { $has_error = true;}	
+			
+		}
 
 			if($has_error) {
 				die('FU');
 			}
-		
-		return $str_get;
-			
+	
+		return $str_get;			
 		}
 
 	public function image2json($str_src,$str_caption,$arr_imgSize) {
