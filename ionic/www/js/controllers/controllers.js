@@ -5,8 +5,9 @@
 
 angular.module('ContaoApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $rootScope, $cordovaNetwork, $ionicPopup, $ionicNativeTransitions, $stateParams, StorageService, ContaoAppMenu, ContaoAppSocialMenu, ContaoAppLabel) {
+.controller('AppCtrl', function($scope, $rootScope, $cordovaNetwork, $ionicPopup, $ionicNativeTransitions, $stateParams, StorageService, ContaoAppMenu, ContaoAppSocialMenu, ContaoAppLabel, ContaoAppConfig) {
 
+  $scope.fileURL = ContaoAppConfig.fileURL;
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 
   if(window.cordova && $cordovaNetwork.getNetwork()=='none') {
@@ -41,7 +42,7 @@ angular.module('ContaoApp.controllers', [])
 
 })
 
-.controller('NewslistsCtrl', function($scope, $stateParams, $ionicLoading, $timeout, $ionicScrollDelegate, $cordovaToast, DataService, ContaoAppConfig) {
+.controller('NewslistsCtrl', function($scope, $stateParams, $ionicLoading, $timeout, $ionicScrollDelegate, $cordovaToast, DataService) {
 
     $ionicLoading.show();
     $scope.page = 0;
@@ -91,7 +92,7 @@ angular.module('ContaoApp.controllers', [])
 
 })
 
-.controller('ContentCtrl', function($scope, $stateParams, $ionicLoading, $cordovaSocialSharing, $cordovaToast, DataService, StorageService, FindIndexByKeyValue, ContaoAppConfig, ContaoAppLabel) {
+.controller('ContentCtrl', function($scope, $stateParams, $ionicLoading, $cordovaSocialSharing, $cordovaToast, DataService, StorageService, FindIndexByKeyValue, ContaoAppLabel) {
 
     var data = []
     $scope.elements =[]
@@ -99,6 +100,7 @@ angular.module('ContaoApp.controllers', [])
     $scope.page = 0;
     $scope.ptable = $stateParams.ptable;
     $ionicLoading.show();
+
     $scope.addToBookmarks = function(objContent) {
      
 
@@ -193,7 +195,7 @@ angular.module('ContaoApp.controllers', [])
 })
 
 .controller('GalleryViewerCtrl', function($scope, $stateParams, $ionicLoading, DataService, $ionicScrollDelegate, $ionicSlideBoxDelegate) {
-
+    
      DataService.GetContentElement($stateParams.ptable,$stateParams.pid,$stateParams.id).then(function(items){
                 $scope.elements = items.data.response[0].pictures;
           }).finally(function() {

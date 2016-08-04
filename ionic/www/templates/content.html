@@ -18,7 +18,7 @@
     <div ng-if="item" class="item item-body notop-padding nobackground nobottom-border">
       <h1>{{item.headline}}</h1>
       <h2>{{item.subheadline}}</h2>
-      <div class="text" ng-bind-html="item.teaser"></div>
+      <div class="text" ng-bind-html="item.teaser | parseContaoText"></div>
     </div>
 
     <div ng-if="elements" ng-repeat="element in elements track by element.id">

@@ -7,7 +7,7 @@
       <ion-slide ng-repeat="element in elements track by $index" ng-init="updateSlider()">
           <ion-scroll direction="xy" locking="false" zooming="true" min-zoom="1" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false">
               <div class="item item-image gallery-slide-view">
-              <img src="img/preload.png" ng-src="http://www.marq.one/{{element.img.src}}">
+              <img src="img/preload.png" ng-src="{{fileURL}}{{element.img.src}}">
               </div>
           </ion-scroll>
       </ion-slide>

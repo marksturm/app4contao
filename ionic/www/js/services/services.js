@@ -10,7 +10,8 @@ angular.module('ContaoApp.services', [])
     URL: 'http://www.marq.one/',
     apiURL: 'http://api.marq.one/',
     fileURL: 'http://marq.one/',
-    ShareTitle: 'Geteilt mit App4Contao'
+    ShareTitle: 'Geteilt mit app4contao',
+    startPage: '/app/newslist/1',
 })
 
 .constant('ContaoAppMenu',

@@ -55,7 +55,7 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
   });
 })
 
-.config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $ionicNativeTransitionsProvider) {
+.config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $ionicNativeTransitionsProvider, ContaoAppConfig) {
 
   $ionicConfigProvider.views.transition('none');
 
@@ -149,7 +149,7 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
     }
   })
   // fallback
-  $urlRouterProvider.otherwise('/app/newslist/1');
+  $urlRouterProvider.otherwise(ContaoAppConfig.startPage);
 })
 
 .filter('parseContaoText', function ($sce, $sanitize, ContaoAppConfig) {
