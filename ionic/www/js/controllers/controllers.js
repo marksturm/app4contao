@@ -92,7 +92,7 @@ angular.module('ContaoApp.controllers', [])
 
 })
 
-.controller('ContentCtrl', function($scope, $stateParams, $ionicLoading, $cordovaSocialSharing, $cordovaToast, DataService, StorageService, FindIndexByKeyValue, ContaoAppLabel) {
+.controller('ContentCtrl', function($scope, $stateParams, $ionicLoading, $cordovaSocialSharing, $cordovaToast, DataService, StorageService, FindIndexByKeyValue, ContaoAppLabel, ContaoAppConfig) {
 
     var data = []
     $scope.elements =[]
