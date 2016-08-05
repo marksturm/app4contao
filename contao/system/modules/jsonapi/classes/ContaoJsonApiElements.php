@@ -100,16 +100,34 @@ class ContaoJsonApiElements
 		return $objOutput;
 	}
 	public function getGalleryElement($str_contentId,$arr_imgSize) {
-		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,multiSRC FROM tl_content WHERE id=?")->execute($str_contentId)->next();
+		$objTable = Database::getInstance()->prepare("SELECT id,type,headline,multiSRC,orderSRC,sortBy FROM tl_content WHERE id=?")->execute($str_contentId)->next();
+		$objOutput['test'] = '';
 		$objOutput['type'] = $objTable->type;
 		$objOutput['id'] = $objTable->id;
 		$objOutput['headline'] = ContaoJsonApiHelper::parseText(unserialize($objTable->headline)['value']);
-		$objPictures = \FilesModel::findMultipleByUuids(deserialize($objTable->multiSRC)); 
 		
-		while ( $objPictures->next() ) { 
-			$arrTempPictures[] = ContaoJsonApiHelper::image2json($objPictures->uuid,$objTable->caption,$arr_imgSize);
+		/*
+		// In dieser Version der API wird zuerst nur die individuelle Reihenfolge bei der Gallerie unterstützt.
+		*/
+
+		if($objTable->sortBy == "custom") {
+			$multiSource = $objTable->orderSRC;
+		} else {
+			$multiSource = $objTable->multiSRC;
 		}
 		
+		$objPictures = \FilesModel::findMultipleByUuids(deserialize($multiSource));
+		while ($objPictures->next()) { 
+			if($objPictures->type == "folder") {
+				$objSubfiles = \FilesModel::findByPid($objPictures->uuid);		
+					while ($objSubfiles->next()) {
+						$arrTempPictures[] = ContaoJsonApiHelper::image2json($objSubfiles->uuid,$objTable->caption,$arr_imgSize);
+						}
+			} else {
+				$arrTempPictures[] = ContaoJsonApiHelper::image2json($objPictures->uuid,$objTable->caption,$arr_imgSize);	
+			}
+		}
+
 		$objOutput['pictures']=$arrTempPictures;
 		return $objOutput;
 	}
