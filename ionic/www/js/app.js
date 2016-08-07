@@ -34,7 +34,7 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
     if(window.cordova && window.plugins.OneSignal) {
   
       var notificationOpenedCallback = function(jsonData) {
-        //alert("notification is received");
+        //alert("notification");
       };
 
       window.plugins.OneSignal.init(ContaoAppOneSignal.OneSignalKey,
@@ -47,7 +47,7 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
         console.log('getIds: ' + JSON.stringify(ids));
       });
 
-      // Show an alert box if a notification comes in when the user is in your app.
+      // alert box wenn eine notification ankommt und ein user in der app ist.
       window.plugins.OneSignal.setSubscription(true);
       window.plugins.OneSignal.enableNotificationsWhenActive(true);
       window.plugins.OneSignal.enableInAppAlertNotification(false);
@@ -63,32 +63,26 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
 
   $ionicConfigProvider.scrolling.jsScrolling(false);
   
- if (ionic.Platform.isAndroid()) {
-  
-  var test = 'templates/menu.html';
-  $ionicNativeTransitionsProvider.setDefaultOptions({
-      duration: 300,
-      slowdownfactor: 4,
-      fixedPixelsTop: 44,
-      backInOppositeDirection: true,
-  })  
-
+    if (ionic.Platform.isAndroid()) {
+      var menu_tpl = 'templates/menu.html';
+      var pfixedPixelsTop = 44;
     } else {
-  var test = 'templates/menu_ios.html';
-  $ionicNativeTransitionsProvider.setDefaultOptions({
+      var menu_tpl = 'templates/menu_ios.html';
+      var pfixedPixelsTop = 64;
+    }
+
+ $ionicNativeTransitionsProvider.setDefaultOptions({
       duration: 300,
       slowdownfactor: 4,
-      fixedPixelsTop: 64,
+      fixedPixelsTop: pfixedPixelsTop,
       backInOppositeDirection: true,
-  })    
-
-    }
+  })
 
   $stateProvider
     .state('ContaoApp', {
     url: '/app',
     abstract: true,
-    templateUrl: test,
+    templateUrl: menu_tpl,
     controller: 'AppCtrl'
     })
 
@@ -154,13 +148,44 @@ angular.module('ContaoApp', ['ionic','ContaoApp.controllers','ContaoApp.services
 
 .filter('parseContaoText', function ($sce, $sanitize, ContaoAppConfig) {
   // Hier wird der Output vom Contao geparsed.. bzw. die URLS um die Domain erweitert und dann der inAppBrowser aufgerufen.
-  // Ich weiß noch nicht, wie ich es besser löse. 01.08.2016
-  // Eigentlich müsste hier ein richtig dicker Parser her - daher werden auch nur LINKS unterstützt.
-    return function (text) {
-        var newStringUrlReplace = $sanitize(text).replace('href="','href="'+ContaoAppConfig.URL);
-        var regex = /href="([\S]+)"/g;
-        var newString = newStringUrlReplace.replace(regex, "class=\"externalURL\" onClick=\"cordova.InAppBrowser.open('$1', '_blank', 'location=yes')\"");
-        return $sce.trustAsHtml(newString);
-    }
-});
+  // Sollte das irgendwo ein Bug geben, wird die API erweitert und der Dreck wird mit PHP gelöst. APP -> DOMAIN -> API -> DOMAIN -> APP. 
 
+  return function ( text ) {
+  text = $sanitize(text);
+  var source,sear,repl;
+  var newString;
+  var regex = /href="([\S]+)"/g;
+  var extMatch = /http|https|\/\//g;
+  var mtMatch = /mailto:/g;
+
+  var div = document.createElement("div");
+  div.innerHTML = text;
+  var aList = div.getElementsByTagName("a");
+  var aListNew = new Array();
+  var href,t;
+  
+  if(aList.length>0){
+  
+    for(var i = 0; i<aList.length; i++ ){
+    	href = aList[i].getAttribute("href");
+    	t = aList[i].outerHTML;
+    	t = $sanitize(t);
+      
+    	if(href.match(extMatch)!=null){
+        	newString = t.replace(regex, "class=\"externalURL\" onClick=\"cordova.InAppBrowser.open('$1', '_blank', 'location=yes')\"");
+
+      	} else if(href.match(mtMatch)!=null){
+        	newString = t;
+      	} else{
+        	newString = t.replace(regex, "class=\"externalURL\" onClick=\"cordova.InAppBrowser.open('"+ContaoAppConfig.URL+"$1', '_blank', 'location=yes')\"");
+      	}
+	
+		source = text;
+		sear = t;
+		repl = newString;
+		text = text.replace(t,newString);
+    	}
+  	}
+    return $sce.trustAsHtml(text);
+  };
+});
