@@ -1,5 +1,5 @@
-app4contao 1.0
-===================
+OUTDATED! DONT USE IT ANYMORE!!! app4contao 1.0
+=========================================================
 
 
 Dieses Paket beinhaltet den Sourcecode für eine auf dem Ionicframework (1.3) basierende App für iOS und Android. Als Backend dient Contao (ab Version 3.5). Eine Anleitung folgt in kürze.
